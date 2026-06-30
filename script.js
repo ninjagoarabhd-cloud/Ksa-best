@@ -437,20 +437,3 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchMovies();
     fetchSeries();
 });
-document.addEventListener('DOMContentLoaded', function() {
-    // نحدد المشغل (أو الحاوية التي تحتويه)
-    var videoContainer = document.querySelector('video') || document.querySelector('.player-container'); 
-
-    document.body.addEventListener('click', function(e) {
-        // نتحقق إذا كانت الضغطة داخل منطقة الفيديو أو أي من أزرار التحكم الخاصة به
-        if (videoContainer && videoContainer.contains(e.target)) {
-            // إذا كانت داخل الفيديو، لا نفعل شيئاً (نسمح للفيديو بالاستجابة للمستخدم)
-            return; 
-        }
-
-        // إذا كانت الضغطة خارج الفيديو، نظهر الإعلان
-        if (typeof mona !== 'undefined') {
-            mona.show();
-        }
-    }, { capture: true });
-});
