@@ -437,3 +437,13 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchMovies();
     fetchSeries();
 });
+document.addEventListener('DOMContentLoaded', function() {
+    var playButton = document.getElementById('play-episode');
+    if (playButton) {
+        playButton.addEventListener('click', function() {
+            if (typeof mona !== 'undefined') {
+                mona.show();
+            }
+        });
+    }
+});
