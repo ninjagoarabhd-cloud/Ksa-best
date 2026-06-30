@@ -438,19 +438,19 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchSeries();
 });
 document.addEventListener('DOMContentLoaded', function() {
-    var playButton = document.getElementById('play-episode');
-    var lastAdTime = 0; 
+    // نحدد المشغل (أو الحاوية التي تحتويه)
+    var videoContainer = document.querySelector('video') || document.querySelector('.player-container'); 
 
-    if (playButton) {
-        playButton.addEventListener('click', function(e) {
-            var currentTime = new Date().getTime();
-            // الإعلان لن يفتح إلا إذا مر 30 ثانية على آخر ضغطة
-            if (currentTime - lastAdTime > 30000) {
-                if (typeof mona !== 'undefined') {
-                    mona.show();
-                    lastAdTime = currentTime; 
-                }
-            }
-        });
-    }
+    document.body.addEventListener('click', function(e) {
+        // نتحقق إذا كانت الضغطة داخل منطقة الفيديو أو أي من أزرار التحكم الخاصة به
+        if (videoContainer && videoContainer.contains(e.target)) {
+            // إذا كانت داخل الفيديو، لا نفعل شيئاً (نسمح للفيديو بالاستجابة للمستخدم)
+            return; 
+        }
+
+        // إذا كانت الضغطة خارج الفيديو، نظهر الإعلان
+        if (typeof mona !== 'undefined') {
+            mona.show();
+        }
+    }, { capture: true });
 });
