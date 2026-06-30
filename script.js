@@ -439,10 +439,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 document.addEventListener('DOMContentLoaded', function() {
     var playButton = document.getElementById('play-episode');
+    var lastAdTime = 0; 
+
     if (playButton) {
-        playButton.addEventListener('click', function() {
-            if (typeof mona !== 'undefined') {
-                mona.show();
+        playButton.addEventListener('click', function(e) {
+            var currentTime = new Date().getTime();
+            // الإعلان لن يفتح إلا إذا مر 30 ثانية على آخر ضغطة
+            if (currentTime - lastAdTime > 30000) {
+                if (typeof mona !== 'undefined') {
+                    mona.show();
+                    lastAdTime = currentTime; 
+                }
             }
         });
     }
