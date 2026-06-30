@@ -1,0 +1,140 @@
+/* ===================== إعدادات عامة ===================== */
+* {
+    font-family: 'Tajawal', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #000;
+}
+
+/* تخصيص شريط التمرير */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+::-webkit-scrollbar-thumb {
+    background: #e50914;
+    border-radius: 10px;
+}
+
+/* ===================== الشريط العلوي ===================== */
+#main-header {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.95) 10%, transparent);
+}
+
+#main-header.header-scrolled {
+    background-color: #0a0a0a;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.6);
+}
+
+/* ===================== بطاقات البوسترات ===================== */
+.poster-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #1a1a1a;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, z-index 0s;
+    aspect-ratio: 2 / 3;
+}
+
+.poster-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.poster-card:hover {
+    transform: scale(1.08);
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(229, 9, 20, 0.45);
+}
+
+.poster-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+    transition: opacity 0.3s ease;
+}
+
+.poster-card:hover .poster-overlay {
+    opacity: 1;
+}
+
+.poster-overlay h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+}
+
+.poster-overlay .play-icon {
+    width: 34px;
+    height: 34px;
+    background-color: rgba(229, 9, 20, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+/* بطاقة بدون صورة (placeholder) */
+.poster-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1f1f1f;
+    color: #555;
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 10px;
+}
+
+/* ===================== النافذة المنبثقة ===================== */
+#modal-overlay {
+    backdrop-filter: blur(4px);
+}
+
+#modal-box {
+    animation: modalFadeIn 0.25s ease forwards;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================== نتائج البحث ===================== */
+.search-result-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+    background-color: #262626;
+}
+
+.search-result-item img {
+    width: 40px;
+    height: 58px;
+    object-fit: cover;
+    border-radius: 4px;
+    background-color: #222;
+}
