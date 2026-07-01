@@ -306,12 +306,7 @@ async function openModal(id, mediaType) {
         } else {
             seriesControls.classList.add("hidden");
             // تشغيل الفيلم فوراً عبر رابط البث
-            player.source = {
-    type: 'video',
-    sources: [{ src: buildVideoUrl(id, mediaType), type: 'video/mp4' }]
-};
-player.play();
-
+            videoPlayer.src = buildVideoUrl();
         }
 
         modalOverlay.classList.remove("hidden");
@@ -326,8 +321,7 @@ player.play();
 
 function closeModal() {
     modalOverlay.classList.add("hidden");
-    player.stop();
-
+    videoPlayer.src = ""; 
     document.body.style.overflow = "auto";
 
     // إعادة تفعيل الإعلانات بعد الخروج من الفيلم/المسلسل
