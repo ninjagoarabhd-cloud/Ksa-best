@@ -326,7 +326,8 @@ player.play();
 
 function closeModal() {
     modalOverlay.classList.add("hidden");
-    videoPlayer.src = ""; 
+    player.stop();
+
     document.body.style.overflow = "auto";
 
     // إعادة تفعيل الإعلانات بعد الخروج من الفيلم/المسلسل
