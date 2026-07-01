@@ -89,15 +89,10 @@
 
         <!-- منطقة المشغل (Iframe Player) -->
         <div class="relative w-full aspect-video bg-black">
-            <iframe
-                id="video-player"
-                class="w-full h-full"
-                src=""
-                title="مشغل الفيديو"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
+            <video id="player" playsinline controls class="w-full h-full">
+    <source id="video-source" src="" type="video/mp4" />
+</video>
+
         </div>
 
         <!-- تفاصيل المحتوى -->
