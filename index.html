@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-
     <meta name="monetag" content="727061bd455dea596d740f9170a793c9">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,10 +86,15 @@
 
         <!-- منطقة المشغل (Iframe Player) -->
         <div class="relative w-full aspect-video bg-black">
-            <video id="player" playsinline controls class="w-full h-full">
-    <source id="video-source" src="" type="video/mp4" />
-</video>
-
+            <iframe
+                id="video-player"
+                class="w-full h-full"
+                src=""
+                title="مشغل الفيديو"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
         </div>
 
         <!-- تفاصيل المحتوى -->
