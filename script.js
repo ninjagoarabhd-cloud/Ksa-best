@@ -50,37 +50,6 @@ let currentMediaState = {
 };
 
 /* =====================================================================
-   3.5) التحكم بسكربت الإعلانات (Popunder) — يعمل حسب حالة الـ Modal
-   لا يتم تحميل الإعلان أثناء فتح الفيلم/المسلسل، ويعود تلقائياً
-   عند إغلاق النافذة المنبثقة.
-   ===================================================================== */
-const AD_SCRIPT_SRC = 'https://quge5.com/88/tag.min.js';
-const AD_SCRIPT_ID = 'popunder-ad-script';
-let isModalOpen = false;
-
-function loadAdScript() {
-    if (document.getElementById(AD_SCRIPT_ID)) return; // محمّل أصلاً
-    const s = document.createElement('script');
-    s.src = AD_SCRIPT_SRC;
-    s.id = AD_SCRIPT_ID;
-    s.async = true;
-    document.head.appendChild(s);
-}
-
-function removeAdScript() {
-    const s = document.getElementById(AD_SCRIPT_ID);
-    if (s) s.parentNode.removeChild(s);
-}
-
-// طبقة حماية إضافية: تمنع أي نقرة من تفعيل أي مستمع إعلاني سابق
-// طالما الـ Modal مفتوح، حتى لو كان السكربت قد حُمّل قبل فتح الفيلم
-document.addEventListener('click', function (e) {
-    if (isModalOpen) {
-        e.stopImmediatePropagation();
-    }
-}, true);
-
-/* =====================================================================
    4) دوال جلب البيانات من TMDB
    ===================================================================== */
 
@@ -265,10 +234,6 @@ function pickBestTrailer(videos) {
    7) منطق فتح وتشغيل النافذة المنبثقة (Modal)
    ===================================================================== */
 async function openModal(id, mediaType) {
-    // إيقاف الإعلانات فور فتح الفيلم/المسلسل
-    isModalOpen = true;
-    removeAdScript();
-
     showLoading(true);
 
     try {
@@ -307,6 +272,10 @@ async function openModal(id, mediaType) {
             seriesControls.classList.add("hidden");
             // تشغيل الفيلم فوراً عبر رابط البث
             videoPlayer.src = buildVideoUrl();
+
+            /* ============================================================
+               مكان كود الإعلانات للأفلام (Pop-under)
+               ============================================================ */
         }
 
         modalOverlay.classList.remove("hidden");
@@ -323,10 +292,6 @@ function closeModal() {
     modalOverlay.classList.add("hidden");
     videoPlayer.src = ""; 
     document.body.style.overflow = "auto";
-
-    // إعادة تفعيل الإعلانات بعد الخروج من الفيلم/المسلسل
-    isModalOpen = false;
-    loadAdScript();
 }
 
 async function setupSeasonsAndEpisodes(tvId) {
@@ -390,6 +355,10 @@ async function populateEpisodes(tvId, seasonNumber) {
 // دالة تشغيل البث المباشر للمسلسلات
 async function playEpisodeStream() {
     videoPlayer.src = buildVideoUrl();
+
+    /* ============================================================
+       مكان كود الإعلانات للمسلسلات (Pop-under)
+       ============================================================ */
 }
 
 /* =====================================================================
@@ -467,5 +436,4 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchTrending();
     fetchMovies();
     fetchSeries();
-    loadAdScript(); // تحميل الإعلان في الصفحة الرئيسية فقط
 });
