@@ -306,7 +306,12 @@ async function openModal(id, mediaType) {
         } else {
             seriesControls.classList.add("hidden");
             // تشغيل الفيلم فوراً عبر رابط البث
-            videoPlayer.src = buildVideoUrl();
+            player.source = {
+    type: 'video',
+    sources: [{ src: buildVideoUrl(id, mediaType), type: 'video/mp4' }]
+};
+player.play();
+
         }
 
         modalOverlay.classList.remove("hidden");
